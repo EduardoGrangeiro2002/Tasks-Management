@@ -26,7 +26,8 @@ func main() {
 	var cmdFinish = usecase.FinishTask()
 	var cmdLs = usecase.LsTask()
 	var cmdRm = usecase.RmTask()
-	rootCmd.AddCommand(cmdInit, cmdFinish, cmdLs, cmdRm)
+	var cmdReport = usecase.ReportTask()
+	rootCmd.AddCommand(cmdInit, cmdFinish, cmdLs, cmdRm, cmdReport)
 	rootCmd.Execute()
 }
 
