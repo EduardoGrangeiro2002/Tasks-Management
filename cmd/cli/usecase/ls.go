@@ -15,6 +15,7 @@ type Task struct {
 	ID        int
 	Name      string
 	Project   string
+	Classification string
 	StartDate string
 	EndDate   string
 	Closed    bool
@@ -33,21 +34,22 @@ func LsTask() *cobra.Command {
 				log.Fatal(err)
 			}
 			table := tablewriter.NewWriter(os.Stdout)
-			table.SetHeader([]string{"ID", "Name", "Project", "Start Date", "End Date", "Closed"})
+			table.SetHeader([]string{"ID", "Name", "Project", "Classification", "Start Date", "End Date", "Closed"})
 
 			for rows.Next() {
 				var id int
 				var name string
 				var project string
+				var classification string
 				var startDate string
 				var endDate sql.NullString
 				var closed bool
-				err = rows.Scan(&id, &name, &project, &startDate, &endDate, &closed)
+				err = rows.Scan(&id, &name, &project, &classification, &startDate, &endDate, &closed)
 				if err != nil {
 					log.Fatal(err)
 				}
-				task := Task{ID: id, Name: name, Project: project, StartDate: startDate, EndDate: endDate.String, Closed: closed}
-				table.Append([]string{strconv.Itoa(task.ID), task.Name, task.Project, task.StartDate, task.EndDate, strconv.FormatBool(task.Closed)})
+				task := Task{ID: id, Name: name, Project: project, Classification: classification, StartDate: startDate, EndDate: endDate.String, Closed: closed}
+				table.Append([]string{strconv.Itoa(task.ID), task.Name, task.Project, task.Classification, task.StartDate, task.EndDate, strconv.FormatBool(task.Closed)})
 			}
 			table.Render()
 		},
