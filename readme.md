@@ -14,4 +14,4 @@ This Task Management application is developed in Go and utilizes SQLite for data
   git clone https://github.com/EduardoGrangeiro2002/Tasks-Management.git
   cd Tasks-Management
   go mod tidy
-  go run main.go
+  go run cmd/cli/main.go
